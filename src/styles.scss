@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+
+body {
+    font-family: 'Anek Latin';
+	font-size: 22px;
+	margin: 0;
+	overflow-x: hidden;
+}
+
+*::selection {
+	color: gray;
+	background-color: linen;
+}

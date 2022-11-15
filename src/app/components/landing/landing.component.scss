@@ -1,0 +1,266 @@
+
+.container {
+	padding-left: 50px;
+	padding: 50px;
+	min-height: 750px;
+
+	display: inline-flex;
+	flex-wrap: wrap;
+	> div {
+		margin: 15px;
+	}
+}
+
+
+.add {
+	background-color: wheat;
+	width: 280px;
+	height: 360px;
+	border-radius: 30px;
+
+	color: linen;
+	font-size:10em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	user-select: none;
+	cursor: pointer;
+}
+
+
+.wrap {
+	position: relative;
+}
+
+
+.note-container {
+
+	background-color: wheat;
+	width: 280px;
+	height: 360px;
+	border-radius: 30px;
+	position: static;
+
+	transition: all 0.5s, z-index 0.5s 0.1s;
+	animation: trans1 0s;
+	animation-delay: 0.5s;
+	animation-fill-mode: backwards;
+
+	border: 1px solid black;
+	z-index: 1;
+
+	overflow-x: hidden;
+	left: 0;
+	right: 0;
+	top: 0;
+	bottom: 0;
+	
+	&:focus-within{
+
+		position: sticky;
+		z-index: 2;
+		transform: scale(2);
+
+		left: calc(50vw - 150px);
+		right: calc(50vw - 150px);
+		top: 31.16%;
+		bottom: 31.16%;
+		//top: 220px;
+		//bottom: 220px;
+
+		transition: all 0.5s, z-index 0s;
+		animation: trans2 0s;
+		animation-delay: 0s;
+		animation-fill-mode: forwards;
+
+		canvas {
+			cursor: crosshair;
+		}
+
+		&:hover {
+			position: sticky;
+
+			> .delete {
+				visibility: hidden;
+			}
+		}
+
+	}
+
+	&:hover {
+
+		position: relative;
+
+		> .delete {
+			background-color: white;
+			visibility: visible;
+			width: 40px;
+			height: 40px;
+			transition: transform 0.1s;
+
+			position: absolute;
+			top: 10px;
+			right: 10px;
+
+			display: flex;
+			align-items: center;
+			justify-content: center;
+	
+		}
+	}
+
+	
+	&::-webkit-scrollbar {
+		width: 5px;
+	}
+	&::-webkit-scrollbar-thumb {
+		background: gray;
+		border-radius: 15px;
+	}
+	&::-webkit-scrollbar-track {
+		margin-top: 30px;
+		margin-bottom: 30px;
+
+		background: linen;
+		border-radius: 15px;
+	}
+}
+
+.delete {
+	visibility: hidden;
+}
+
+
+
+
+@keyframes trans1 {
+	from {
+		position: sticky;
+		top: auto;
+		bottom: auto;
+	}
+	to {
+		position: static;
+	}
+}
+@keyframes trans2 {
+	from {
+		position: static;
+	}
+	to {
+		position: sticky;
+	}
+}
+
+
+
+.note {
+
+	position: absolute;
+	width: 220px;
+	min-height: 300px;
+	height: auto;
+
+
+	outline: none;
+	padding: 30px;
+
+
+	&[contenteditable]:empty::before {
+		content: 'Add note';
+		color: white;
+	}
+
+	& > * {
+		z-index: 2;
+	}
+
+}
+
+
+
+
+.toolbar {
+	position: fixed;
+	align-items: center;
+	background-color: lightgray;
+	
+	display: flex;
+	justify-content: space-around;
+
+	width: 500px;
+	height: 70px;
+	border-radius: 50px 0 0 0;
+	border-left: 1px solid gray;
+	border-top: 1px solid gray;
+
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-right: 10px;
+
+	z-index: 9;
+
+	bottom: 0;
+	right: 0;
+
+	transition: 0.5s;
+	transform: translateY(100%);
+
+	& > button {
+		transition: 0.1s;
+	}
+
+}
+
+
+.color {
+
+	width: 45px;
+	height: 45px;
+	border-radius: 50%;
+	transition: 0.1s;
+
+	&:hover {
+		box-shadow: inset 5px 5px 10px rgb(0 0 0 / 0.5);
+	}
+
+	cursor: pointer;
+}
+
+.black {
+	
+	background-color: black;
+
+	&:hover {
+		background-color: rgb(50,50,50);
+	}
+
+}
+
+button {
+
+	padding: 15px;
+	padding-top: 15px;
+	padding-bottom: 15px;
+	border: 0;
+	border-radius: 50px;
+
+	&:active {
+		transform: scale(0.85);
+	}
+
+	cursor: pointer;
+
+}
+
+
+canvas {
+	position: absolute;
+	border-radius: 30px;
+	user-select: none;
+
+
+	top: 0;
+	left: 0;
+}

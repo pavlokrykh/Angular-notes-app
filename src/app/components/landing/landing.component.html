@@ -1,0 +1,70 @@
+<section class="container">
+
+	<div [ngClass]="note" #preload *ngFor="let n of notes; let i = index;">
+		<div class="wrap">
+			<span #text class="note" role="textbox" 
+				(keydown.enter)="enter($event)"
+				(keydown)="expand($event)"
+				(focus)="open($event, i)" (focusout)="close($event)" 
+				contenteditable="true" style="caret-color: auto;">
+				
+				<div *ngIf="notes[i][0]"></div>
+				
+				<br *ngIf="$doodles[i]">
+
+				<canvas *ngIf="$doodles[i]" #canvas (mousedown)="drawing($event)" 
+					(mouseup)="stop($event)" (mousemove)="move($event)" 
+					(mouseout)="stop($event)" [style]="'z-index: '+z">
+				</canvas>
+
+			</span>
+
+		</div>
+
+		<button class="delete" (mousedown)="del($event, i)">x</button>
+	</div>
+
+
+	
+
+
+	<div class="add" (click)="add()">+</div>
+
+</section>
+
+
+<section class="toolbar" #toolbar (mousedown)="preventClose($event)">
+
+	
+	<div #colors class="color black" (click)="activeColor($event)"></div>
+
+	<div #colors class="color" (click)="activeColor($event)" 
+		style="background-color: red;"></div>
+
+	<div #colors class="color" (click)="activeColor($event)" 
+		style="background-color: green;"></div>
+
+	<div #colors class="color" (click)="activeColor($event)" 
+		style="background-color: blue;"></div>
+
+	<div #colors class="color" (click)="activeColor($event)" 
+		style="background-color: yellow;"></div>
+	
+	<div #colors class="color" (click)="activeColor($event)" 
+		style="background-color: white;"></div>
+
+
+
+
+
+	<button class="btn erase" [hidden]="mode=='text' ? true : false"
+		style="background-color: white; border: 2px solid gray"
+		(click)="erase()">Erase</button>
+	<button class="btn clear" [hidden]="mode=='text' ? true : false"
+		style="background-color: orange; border: 2px solid brown"
+		(click)="clear()">Clear</button>
+	<button class="btn draw" (click)="changeMode()"
+		style="background-color: dodgerblue;
+			border: 2px solid blue">{{mode=='text'?'Draw':'Edit'}}</button>
+
+</section>
